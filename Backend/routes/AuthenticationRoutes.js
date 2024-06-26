@@ -36,7 +36,8 @@ router.post('/auth/login', async (req, res) => {
           {
             id: userLogin.id,
             email: userLogin.email,
-            name: userLogin.name
+            name: userLogin.name,
+            username: userLogin.username
           }, 
           jwtSecretKey, 
           { expiresIn: "1h" }
@@ -50,5 +51,5 @@ router.post('/auth/login', async (req, res) => {
       return res.status(400).json({ message: "Invalid Email" });
     }
   });
-  
+
 module.exports = router;

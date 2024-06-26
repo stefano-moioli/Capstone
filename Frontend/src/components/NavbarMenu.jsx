@@ -26,7 +26,7 @@ export default function NavbarMenu() {
               <Link to="/profile" className="me-3">Profile</Link>
               <Button onClick={logout} className="me-3">Logout</Button>
               <Navbar.Text>
-                Signed in as: <a href="#login">{user.name}</a>
+                Signed in as: <Link to="/profile">{user.username}</Link>
               </Navbar.Text>
             </>
           )}

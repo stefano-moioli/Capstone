@@ -29,25 +29,25 @@ export default function RegisterForm(){
         <Form>
         <Form.Group as={Row} className="mb-3" controlId="formName">
           <Form.Label column sm="2">
-            Name
+            
           </Form.Label>
           <Col sm="10">
             <Form.Control type="text" name="name" placeholder="name" onChange={formHandler}/>
           </Col>
         </Form.Group>
 
-        <Form.Group as={Row} className="mb-3" controlId="formSurname">
+        <Form.Group as={Row} className="mb-3" controlId="formUsername">
           <Form.Label column sm="2">
-            Surname
+          
           </Form.Label>
           <Col sm="10">
-            <Form.Control type="text" name="surname" placeholder="surname" onChange={formHandler}/>
+            <Form.Control type="text" name="username" placeholder="username" onChange={formHandler}/>
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3" controlId="formEmail">
           <Form.Label column sm="2">
-            Email
+            
           </Form.Label>
           <Col sm="10">
             <Form.Control type="email" name="email" placeholder="email" onChange={formHandler}/>
@@ -56,7 +56,7 @@ export default function RegisterForm(){
   
         <Form.Group as={Row} className="mb-3" controlId="formPassword">
           <Form.Label column sm="2">
-            Password
+            
           </Form.Label>
           <Col sm="10">
             <Form.Control type="password" name="password" placeholder="Password" onChange={formHandler}/>
@@ -65,14 +65,14 @@ export default function RegisterForm(){
 
         <Form.Group as={Row} className="mb-3" controlId="formAvatar">
           <Form.Label column sm="2">
-            Avatar
+            
           </Form.Label>
           <Col sm="10">
             <Form.Control type="text" name="avatar" placeholder="avatar" onChange={formHandler}/>
           </Col>
         </Form.Group>
 
-        <Button type="submit" className="bg-dark w-50" onClick={formSubmitHandler}> Register </Button>
+        <Button type="submit" className="bg-dark w-100" onClick={formSubmitHandler}> Register </Button>
  
       </Form>
       </Container>

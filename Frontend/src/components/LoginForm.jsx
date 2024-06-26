@@ -38,28 +38,22 @@ export default function LoginForm() {
     <Container>
       <Form>
         <Form.Group as={Row} className="mb-3" controlId="formEmail">
-          <Form.Label column sm="2">
-            Email
-          </Form.Label>
           <Col sm="10">
-            <Form.Control type="email" name="email" placeholder="email" onChange={formHandler} />
+            <Form.Control type="email" name="email" placeholder="Email" onChange={formHandler} />
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} className="mb-3" controlId="formPassword">
-          <Form.Label column sm="2">
-            Password
-          </Form.Label>
           <Col sm="10">
             <Form.Control type="password" name="password" placeholder="Password" onChange={formHandler} />
           </Col>
         </Form.Group>
 
-        <Button type="button" className="bg-dark w-50" onClick={formSubmitHandler}>
+        <Button type="button" className="bg-dark w-100" onClick={formSubmitHandler}>
           Login
         </Button>
       </Form>
-      <Button type="button" className="bg-dark w-50 mt-2">
+      <Button type="button" className="bg-primary w-100 mt-2">
         Login with Google
       </Button>
 
