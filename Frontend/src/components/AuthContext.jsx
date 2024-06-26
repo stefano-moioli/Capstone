@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import {jwtDecode} from 'jwt-decode';
 
 const AuthContext = createContext();
 
@@ -8,13 +9,27 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem('userLogin');
     if (token) {
-      setUser(token); //Capire questo passaggio
+      try {
+        const decoded = jwtDecode(token);
+        setUser(decoded);
+      } catch (error) {
+        console.error('Invalid token in localStorage:', error);
+      }
     }
   }, []);
 
   const login = (token) => {
-    localStorage.setItem('userLogin', token);
-    setUser(token);
+    if (typeof token === 'string') {
+      try {
+        const decoded = jwtDecode(token);
+        localStorage.setItem('userLogin', token);
+        setUser(decoded);
+      } catch (error) {
+        console.error('Invalid token during login:', error);
+      }
+    } else {
+      console.error('Token is not a string:', token);
+    }
   };
 
   const logout = () => {

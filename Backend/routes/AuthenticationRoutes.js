@@ -26,30 +26,29 @@ router.post('/auth/register', (req, res) =>{
 });
 })
 
-router.post('/auth/login', async (req, res) =>{
+router.post('/auth/login', async (req, res) => {
     const email = req.body.email;
-    const userLogin = await userModel.findOne({email: email})
-    if(userLogin){
-        const log = await bcrypt.compare(req.body.password, userLogin.password);
-        if(log){
-
-            const token = jwt.sign(
-
-                {
-                    id: userLogin.id,
-                    email: userLogin.email,
-                    name: userLogin.name
-                }, jwtSecretKey, {expiresIn: "1h"});
-
-                return res.status(200).json(token)
-
-        }else{
-            return res.status(400).json({message: "Invalid Password"});
-        }
-
-    }else{
-        return res.status(400).json({message: "Invalid Email"});
+    const userLogin = await userModel.findOne({ email: email });
+    if (userLogin) {
+      const log = await bcrypt.compare(req.body.password, userLogin.password);
+      if (log) {
+        const token = jwt.sign(
+          {
+            id: userLogin.id,
+            email: userLogin.email,
+            name: userLogin.name
+          }, 
+          jwtSecretKey, 
+          { expiresIn: "1h" }
+        );
+  
+        return res.status(200).json({ token }); // Return token in an object with a key 'token'
+      } else {
+        return res.status(400).json({ message: "Invalid Password" });
+      }
+    } else {
+      return res.status(400).json({ message: "Invalid Email" });
     }
-});
-
+  });
+  
 module.exports = router;
