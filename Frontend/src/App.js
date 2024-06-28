@@ -8,6 +8,7 @@ import LoginPage from './pages/LoginPage';
 import Profile from './pages/Profile';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import NewProjectPage from './pages/NewProjectPage';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
     <Route path='/auth/register' element={<RegisterPage />} />
     <Route path='/auth/login' element={<LoginPage />} />
     <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+    <Route path='/projects/new' element={<ProtectedRoute><NewProjectPage /></ProtectedRoute>} />
     </Routes>
 
     <Footer />

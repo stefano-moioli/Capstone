@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 export default function Profile(){
@@ -35,10 +36,10 @@ export default function Profile(){
     
     return(
         <Container>
-            <h1>Profile Page by {user.username}</h1>
+            <h1 className="text-center mt-2">Profile Page by {user.username}</h1>
 
-            <h2>Projects</h2>
-            <Row>
+            <h2 className="text-center mt-2">Projects</h2>
+            <Row className="mt-5">
         {profileData.projects.map(project => (
           <Col key={project._id} md={4} className="mb-3">
             <Card>
@@ -52,7 +53,11 @@ export default function Profile(){
       </Row>
 
       <Row>
-        <Button>New Project</Button>
+        <Col className="text-center">
+        <Link to="/projects/new">
+        <Button className="w-50 mt-3">New Project</Button>
+        </Link>
+        </Col>
       </Row>
 
         </Container>
