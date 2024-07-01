@@ -9,28 +9,26 @@ import Profile from './pages/Profile';
 import { AuthProvider } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import NewProjectPage from './pages/NewProjectPage';
+import ProjectPage from './pages/ProjectPage';
 
 function App() {
   return (
-    
     <AuthProvider>
-    <BrowserRouter>
-
-    <NavbarMenu />
-
-    <Routes>
-    <Route path="/" element={<Homepage />} />
-    <Route path='/auth/register' element={<RegisterPage />} />
-    <Route path='/auth/login' element={<LoginPage />} />
-    <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-    <Route path='/projects/new' element={<ProtectedRoute><NewProjectPage /></ProtectedRoute>} />
-    </Routes>
-
-    <Footer />
-
-    </BrowserRouter>
+      <BrowserRouter>
+        <NavbarMenu />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path='/auth/register' element={<RegisterPage />} />
+          <Route path='/auth/login' element={<LoginPage />} />
+          <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route path='/projects/new' element={<ProtectedRoute><NewProjectPage /></ProtectedRoute>} />
+          <Route path='/projects/:id' element={<ProtectedRoute><ProjectPage /></ProtectedRoute>} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </AuthProvider>
   );
 }
 
 export default App;
+

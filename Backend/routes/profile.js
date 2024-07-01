@@ -24,36 +24,4 @@ router.get('/profile', authMiddleware, async (req, res) => {
     }
 });
 
-router.post('/projects', authMiddleware, async(req, res) =>{
-    try {
-        const { title, category, text } = req.body;
-
-        const newProject = new projectModel({
-            title, 
-            category,
-            text,
-            user: req.user.id
-        });
-
-        await newProject.save();
-        return res.status(200).json(newProject);
-    } catch (error) {
-
-        return res.status(500).json({message: "Errore del server", error: error});
-    }
-})
-
-router.get('/ProjectPage', authMiddleware, async(req, res) =>{
-    try {
-        const project = await projectModel.findById(req.project.id);
-        if(!project){
-            return res.status(404).json({message: "Progetto non trovato"});
-        }
-        return res.status(200).json({project});
-        
-    } catch (error) {
-        return res.status(500).json({ message: 'Errore del server', error: error });
-    }
-})
-
 module.exports = router;

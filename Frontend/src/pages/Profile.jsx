@@ -42,12 +42,14 @@ export default function Profile(){
             <Row className="mt-5">
         {profileData.projects.map(project => (
           <Col key={project._id} md={4} className="mb-3">
+            <Link to={`/projects/${project._id}`}>
             <Card>
               <Card.Body>
                 <Card.Title>{project.title}</Card.Title>
                 <Card.Text>{project.category}</Card.Text>
               </Card.Body>
             </Card>
+            </Link>
           </Col>
         ))}
       </Row>
