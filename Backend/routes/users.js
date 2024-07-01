@@ -1,22 +1,14 @@
 const express = require('express');
-const userModel = require('../models/userModel');
 const router = express.Router();
-require('dotenv').config();
+const userModel = require('../models/userModel');
 
-
-
-//Homepage route
-router.get('/', (req, res) =>{
-    return res.status(200).json({message: 'Welcome to the homepage'})
-})
-
-//User by ID
-/*router.get('/user/:id', async(req, res)=>{
-    const id = req.params.id;
-    try{
-        const user = await userModel.findById(id);
+router.get('/users', async (req, res) => {
+    try {
+        const users = await userModel.find({}, 'username');
+        return res.status(200).json(users);
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error', error: error });
     }
-})*/
-
+});
 
 module.exports = router;

@@ -35,4 +35,36 @@ router.get('/projects/:id', authMiddleware, async(req, res) =>{
     }
 });
 
+router.patch('/project/:id/publish', authMiddleware, async (req, res) => {
+    try {
+        const project = await projectModel.findById(req.params.id);
+
+        if (!project) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+
+        if (project.user.toString() !== req.user.id) {
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        project.published = !project.published;
+        await project.save();
+
+        return res.status(200).json(project);
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error', error: error });
+    }
+});
+
+router.get('/user/:userId/projects', authMiddleware, async (req, res) => {
+    try {
+        const projects = await projectModel.find({ user: req.params.userId, published: true }).populate('user', 'username email');
+        return res.status(200).json(projects);
+    } catch (error) {
+        return res.status(500).json({ message: 'Server error', error: error });
+    }
+});
+
+
+
 module.exports = router;

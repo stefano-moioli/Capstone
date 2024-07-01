@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Card, Alert } from "react-bootstrap";
+import { Container, Card, Button, Alert } from "react-bootstrap";
 import axios from 'axios';
+import { useAuth } from "../components/AuthContext";
 
 export default function ProjectPage() {
   const { id } = useParams();
+  const { user } = useAuth();
   const [project, setProject] = useState(null);
   const [error, setError] = useState(null);
 
@@ -28,6 +30,22 @@ export default function ProjectPage() {
     fetchProject();
   }, [id]);
 
+  const handlePublish = async () => {
+    try {
+      const token = localStorage.getItem('userLogin');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+
+      const response = await axios.patch(`http://localhost:3005/project/${id}/publish`, {}, config);
+      setProject(response.data);
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
+
   if (error) {
     return <Alert variant="danger">{error}</Alert>;
   }
@@ -38,7 +56,7 @@ export default function ProjectPage() {
 
   return (
     <Container>
-      <Card className="mt-3">
+      <Card>
         <Card.Body>
           <Card.Title>{project.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{project.category}</Card.Subtitle>
@@ -46,6 +64,11 @@ export default function ProjectPage() {
           <Card.Footer>
             <small className="text-muted">Author: {project.user.username}</small>
           </Card.Footer>
+          {user.id === project.user._id && (
+            <Button onClick={handlePublish} className="mt-3">
+              {project.published ? 'Unpublish' : 'Publish'}
+            </Button>
+          )}
         </Card.Body>
       </Card>
     </Container>

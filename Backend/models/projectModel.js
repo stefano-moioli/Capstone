@@ -30,7 +30,12 @@ const projectSchema = new mongoose.Schema(
             type: Schema.Types.ObjectId,
             ref: "User",
         },
-    }]
+    }],
+
+    published: {
+        type: Boolean,
+        default: false
+    }
 },
 { collection: "Project" }
 )
