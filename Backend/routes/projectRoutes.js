@@ -35,7 +35,7 @@ router.get('/projects/:id', authMiddleware, async(req, res) =>{
     }
 });
 
-router.patch('/project/:id/publish', authMiddleware, async (req, res) => {
+router.patch('/projects/:id/publish', authMiddleware, async (req, res) => {
     try {
         const project = await projectModel.findById(req.params.id);
 
@@ -65,6 +65,60 @@ router.get('/user/:userId/projects', authMiddleware, async (req, res) => {
     }
 });
 
+//Rotta per modifica un progetto
+router.put('/projects/:id', authMiddleware, async (req, res) => {
+    try {
+      const { title, category, text } = req.body;
+      const project = await projectModel.findById(req.params.id);
+  
+      if (!project) {
+        return res.status(404).json({ message: 'Project not found' });
+      }
+  
+      if (project.user.toString() !== req.user.id) {
+        return res.status(403).json({ message: 'Unauthorized' });
+      }
+  
+      project.title = title || project.title;
+      project.category = category || project.category;
+      project.text = text || project.text;
+  
+      await project.save();
+      return res.status(200).json(project);
+    } catch (error) {
+      return res.status(500).json({ message: 'Server error', error: error });
+    }
+  });
+  
+
+// Rotta per eliminare un progetto
+router.delete('/projects/:id', authMiddleware, async (req, res) => {
+    console.log("DELETE request received for project ID:", req.params.id);
+    try {
+        const project = await projectModel.findById(req.params.id);
+        console.log("Project found:", project);
+
+        if (!project) {
+            console.log("Project not found");
+            return res.status(404).json({ message: 'Project not found' });
+        }
+
+        if (project.user.toString() !== req.user.id) {
+            console.log("Unauthorized access attempt by user:", req.user.id);
+            return res.status(403).json({ message: 'Unauthorized' });
+        }
+
+        await projectModel.findByIdAndDelete(req.params.id);
+        console.log("Project deleted successfully");
+
+        return res.status(200).json({ message: 'Project deleted successfully' });
+    } catch (error) {
+        console.error("Server error:", error);
+        return res.status(500).json({ message: 'Server error', error: error });
+    }
+});
+
+module.exports = router;
 
 
 module.exports = router;
