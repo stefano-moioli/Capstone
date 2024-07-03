@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
     {
@@ -22,7 +23,10 @@ const userSchema = new mongoose.Schema(
         avatar: {
             type: String,
             required: false
-        }
+        },
+        following: [{
+            type: Schema.Types.ObjectId, ref: 'User'
+        }]
     },
     { collection : "User" }
 )
