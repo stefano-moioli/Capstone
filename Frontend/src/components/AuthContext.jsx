@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import {jwtDecode} from 'jwt-decode';
+import axios from 'axios';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [followingUsers, setFollowingUsers] = useState([]);
 
   useEffect(() => {
     const token = localStorage.getItem('userLogin');
@@ -12,6 +14,22 @@ export const AuthProvider = ({ children }) => {
       try {
         const decoded = jwtDecode(token);
         setUser(decoded);
+
+        const fetchFollowingUsers = async () => {
+          try {
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            };
+            const response = await axios.get('http://localhost:3005/following', config);
+            setFollowingUsers(response.data);
+          } catch (error) {
+            console.error('Error fetching following users:', error);
+          }
+        };
+
+        fetchFollowingUsers();
       } catch (error) {
         console.error('Invalid token in localStorage:', error);
       }
@@ -24,6 +42,22 @@ export const AuthProvider = ({ children }) => {
         const decoded = jwtDecode(token);
         localStorage.setItem('userLogin', token);
         setUser(decoded);
+
+        const fetchFollowingUsers = async () => {
+          try {
+            const config = {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            };
+            const response = await axios.get('http://localhost:3005/following', config);
+            setFollowingUsers(response.data);
+          } catch (error) {
+            console.error('Error fetching following users:', error);
+          }
+        };
+
+        fetchFollowingUsers();
       } catch (error) {
         console.error('Invalid token during login:', error);
       }
@@ -35,15 +69,14 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('userLogin');
     setUser(null);
+    setFollowingUsers([]);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, followingUsers, setUser, setFollowingUsers }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);

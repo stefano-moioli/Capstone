@@ -27,6 +27,9 @@ app.use(profileEndpoint);
 const projectRoutes = require('./routes/projectRoutes');
 app.use(projectRoutes);
 
+const feedRoutes = require('./routes/feedRoutes');
+app.use(feedRoutes);
+
 const {errorHandler, pageNotFoundHandler} = require('./middleware/Error');
 app.use(errorHandler);
 app.use(pageNotFoundHandler);
