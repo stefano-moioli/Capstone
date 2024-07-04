@@ -43,7 +43,7 @@ router.post('/auth/login', async (req, res) => {
           { expiresIn: "1h" }
         );
   
-        return res.status(200).json({ token }); // Return token in an object with a key 'token'
+        return res.status(200).json({ token });
       } else {
         return res.status(400).json({ message: "Invalid Password" });
       }

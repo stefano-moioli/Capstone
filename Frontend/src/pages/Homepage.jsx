@@ -21,6 +21,10 @@ export default function Homepage() {
         };
         const response = await axios.get('http://localhost:3005/users', config);
 
+        /* if (!user || !user._id) {
+          throw new Error("User not logged in or missing ID");
+        }*/
+
         const updatedUsers = response.data.map(user => ({
           ...user,
           followed: followingUsers.some(followedUser => followedUser._id === user._id)

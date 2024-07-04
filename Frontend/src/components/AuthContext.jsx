@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       try {
         const decoded = jwtDecode(token);
+        console.log("Decoded Token:", decoded);
         setUser(decoded);
 
         const fetchFollowingUsers = async () => {
@@ -40,6 +41,7 @@ export const AuthProvider = ({ children }) => {
     if (typeof token === 'string') {
       try {
         const decoded = jwtDecode(token);
+        console.log("Decoded Token2:", decoded);
         localStorage.setItem('userLogin', token);
         setUser(decoded);
 

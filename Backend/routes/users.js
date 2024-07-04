@@ -3,9 +3,14 @@ const router = express.Router();
 const userModel = require('../models/userModel');
 const authMiddleware = require('../middleware/AuthMiddleware');
 
-router.get('/users', async (req, res) => {
+router.get('/users', authMiddleware, async (req, res) => {
     try {
-        const users = await userModel.find({}, 'username');
+        // Get the ID of the logged-in user from the request object
+        const loggedUserId = req.user.id;
+
+        // Find all users except the logged-in user
+        const users = await userModel.find({ _id: { $ne: loggedUserId } }, 'username'); //$ne sta per not equal ed esclude l'id dell'utente loggato
+
         return res.status(200).json(users);
     } catch (error) {
         return res.status(500).json({ message: 'Server error', error: error });
