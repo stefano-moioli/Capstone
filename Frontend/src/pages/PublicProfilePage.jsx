@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Row, Col, Card, Alert } from "react-bootstrap";
+import { useParams, Link } from "react-router-dom";
+import { Container, Row, Col, Card, Alert, Button } from "react-bootstrap";
 import axios from 'axios';
 
 export default function PublicProfilePage() {
@@ -49,6 +49,9 @@ export default function PublicProfilePage() {
                 <Card.Text>{project.text}</Card.Text>
                 <Card.Footer>
                   <small className="text-muted">Author: {project.user.username}</small>
+                  <Link to={`/project/${project._id}`}>
+                    <Button>View & Comment</Button>
+                  </Link>
                 </Card.Footer>
               </Card.Body>
             </Card>

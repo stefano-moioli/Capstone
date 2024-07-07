@@ -56,14 +56,23 @@ router.patch('/projects/:id/publish', authMiddleware, async (req, res) => {
     }
 });
 
-router.get('/user/:userId/projects', authMiddleware, async (req, res) => {
-    try {
+/* router.get('/user/:userId/projects', authMiddleware, async (req, res) => {
+    try { 
         const projects = await projectModel.find({ user: req.params.userId, published: true }).populate('user', 'username email');
         return res.status(200).json(projects);
     } catch (error) {
         return res.status(500).json({ message: 'Server error', error: error });
     }
-});
+});*/
+
+router.get('/user/:userId/projects', authMiddleware, async (req, res) => {
+    try {
+      const projects = await projectModel.find({ user: req.params.userId }).populate('comments');
+      return res.status(200).json(projects);
+    } catch (error) {
+      return res.status(500).json({ message: 'Server error', error });
+    }
+  });
 
 //Rotta per modifica un progetto
 router.put('/projects/:id', authMiddleware, async (req, res) => {
@@ -117,5 +126,7 @@ router.delete('/projects/:id', authMiddleware, async (req, res) => {
         return res.status(500).json({ message: 'Server error', error: error });
     }
 });
+
+
 
 module.exports = router;

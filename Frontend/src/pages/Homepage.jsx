@@ -160,7 +160,9 @@ export default function Homepage() {
           {feed.map(project => (
             <Card key={project._id} className="mb-3">
               <Card.Body>
-                <Card.Title>{project.title}</Card.Title>
+              <Link to={`/user/${project.user._id}/projects`}>
+                  <Card.Title>{project.title}</Card.Title>
+                </Link>
                 <Card.Text>{project.category}</Card.Text>
                 <Card.Text>{project.text}</Card.Text>
                 <Card.Footer>

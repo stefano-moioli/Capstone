@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
-const commentSchema = require('./commentModel');
 const Schema = mongoose.Schema;
 
-const projectSchema = new mongoose.Schema(
+const projectSchema = new Schema(
   {
     title: {
       type: String,
@@ -21,7 +20,10 @@ const projectSchema = new mongoose.Schema(
       ref: "User",
       required: true
     },
-    comments: [commentSchema],
+    comments: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    }],
     published: {
       type: Boolean,
       default: false

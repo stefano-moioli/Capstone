@@ -30,6 +30,9 @@ app.use(projectRoutes);
 const feedRoutes = require('./routes/feedRoutes');
 app.use(feedRoutes);
 
+const commentRoute = require('./routes/commentRoute');
+app.use(commentRoute);
+
 const {errorHandler, pageNotFoundHandler} = require('./middleware/Error');
 app.use(errorHandler);
 app.use(pageNotFoundHandler);
