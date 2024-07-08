@@ -1,7 +1,8 @@
 import React from "react";
 import { Button, Container, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import { useAuth } from "../AuthContext";
+import style from "../navbar/styles.css"
 
 export default function NavbarMenu() {
   const { user, logout } = useAuth();
@@ -14,10 +15,10 @@ export default function NavbarMenu() {
         <Navbar.Collapse className="justify-content-end">
           {!user ? (
             <>
-              <Button as={Link} to="/auth/login" className="me-3">
+              <Button as={Link} to="/auth/login" className="me-3 navButton">
                 Login
               </Button>
-              <Button as={Link} to="/auth/register" className="me-3">
+              <Button as={Link} to="/auth/register" className="me-3 navButton">
                 Register
               </Button>
             </>

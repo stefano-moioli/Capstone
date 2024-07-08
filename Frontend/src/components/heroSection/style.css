@@ -1,0 +1,18 @@
+
+.wittgenstein-fontWittgenstein {
+  font-family: "Wittgenstein", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.heroSectionContainer{
+    background: linear-gradient(#266b51, #202881);;
+    color: white;
+    padding: 50px;
+}
+
+.heroSection{
+    padding: 50px;
+}
