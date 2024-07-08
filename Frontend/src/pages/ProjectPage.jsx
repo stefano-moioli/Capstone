@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Container, Card, Button, Form, Alert } from 'react-bootstrap';
 import axios from 'axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function ProjectPage() {
   const { id } = useParams();
@@ -50,7 +52,7 @@ export default function ProjectPage() {
     } catch (error) {
         setError(error.response?.data?.message || 'Errore durante l\'eliminazione del progetto');
     }
-};
+  };
 
   const handlePublish = async () => {
     try {
@@ -87,6 +89,25 @@ export default function ProjectPage() {
     }
   };
 
+  const modules = {
+    toolbar: [
+      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+      [{size: []}],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, 
+       {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video'
+  ];
+
   if (error) {
     return <Alert variant="danger">{error}</Alert>;
   }
@@ -122,12 +143,12 @@ export default function ProjectPage() {
                 </Form.Group>
                 <Form.Group controlId="formText" className="mt-3">
                   <Form.Label>Text</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    placeholder="Enter text"
+                  <ReactQuill
+                    theme="snow"
                     value={text}
-                    onChange={(e) => setText(e.target.value)}
+                    onChange={setText}
+                    modules={modules}
+                    formats={formats}
                   />
                 </Form.Group>
               </Form>
@@ -139,7 +160,7 @@ export default function ProjectPage() {
             <>
               <Card.Title>{project.title}</Card.Title>
               <Card.Text>{project.category}</Card.Text>
-              <Card.Text>{project.text}</Card.Text>
+              <Card.Text dangerouslySetInnerHTML={{ __html: project.text }} />
             </>
           )}
           <Button variant="warning" className="mt-3" onClick={() => setIsEditing(!isEditing)}>

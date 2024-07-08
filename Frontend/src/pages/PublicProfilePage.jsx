@@ -46,7 +46,7 @@ export default function PublicProfilePage() {
               <Card.Body>
                 <Card.Title>{project.title}</Card.Title>
                 <Card.Text>{project.category}</Card.Text>
-                <Card.Text>{project.text}</Card.Text>
+                <Card.Text dangerouslySetInnerHTML={{ __html: project.text }} />
                 <Card.Footer>
                   <small className="text-muted">Author: {project.user.username}</small>
                   <Link to={`/project/${project._id}`}>

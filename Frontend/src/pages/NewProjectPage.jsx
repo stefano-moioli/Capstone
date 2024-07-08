@@ -3,6 +3,8 @@ import { useAuth } from "../components/AuthContext";
 import { Button, Container, Form, Alert } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function NewProjectPage() {
   const { user } = useAuth();
@@ -30,6 +32,25 @@ export default function NewProjectPage() {
     }
   };
 
+  const modules = {
+    toolbar: [
+      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+      [{size: []}],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{'list': 'ordered'}, {'list': 'bullet'}, 
+       {'indent': '-1'}, {'indent': '+1'}],
+      ['link', 'image', 'video'],
+      ['clean']
+    ],
+  };
+
+  const formats = [
+    'header', 'font', 'size',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image', 'video'
+  ];
+
   return (
     <Container>
       <h1>New Project</h1>
@@ -56,11 +77,12 @@ export default function NewProjectPage() {
 
         <Form.Group controlId="formText">
           <Form.Label>Text</Form.Label>
-          <Form.Control 
-            as="textarea" 
-            rows={10} 
+          <ReactQuill 
+            theme="snow" 
             value={text} 
-            onChange={(e) => setText(e.target.value)} 
+            onChange={setText} 
+            modules={modules} 
+            formats={formats} 
             required 
           />
         </Form.Group>

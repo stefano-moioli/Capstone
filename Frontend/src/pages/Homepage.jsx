@@ -164,7 +164,7 @@ export default function Homepage() {
                   <Card.Title>{project.title}</Card.Title>
                 </Link>
                 <Card.Text>{project.category}</Card.Text>
-                <Card.Text>{project.text}</Card.Text>
+                
                 <Card.Footer>
                   <small className="text-muted">Author: {project.user.username}</small>
                   {project.user.followed ? (

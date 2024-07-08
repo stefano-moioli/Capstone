@@ -104,7 +104,7 @@ export default function ProjectDetails() {
         <Card.Body>
           <Card.Title>{project.title}</Card.Title>
           <Card.Text>{project.category}</Card.Text>
-          <Card.Text>{project.text}</Card.Text>
+          <Card.Text dangerouslySetInnerHTML={{ __html: project.text }} />
         </Card.Body>
       </Card>
       <h3>Comments</h3>
