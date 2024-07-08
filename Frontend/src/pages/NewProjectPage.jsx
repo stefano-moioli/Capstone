@@ -39,6 +39,7 @@ export default function NewProjectPage() {
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
       [{'list': 'ordered'}, {'list': 'bullet'}, 
        {'indent': '-1'}, {'indent': '+1'}],
+       [{'align': []}],
       ['link', 'image', 'video'],
       ['clean']
     ],
@@ -48,6 +49,7 @@ export default function NewProjectPage() {
     'header', 'font', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
+    'align',
     'link', 'image', 'video'
   ];
 
@@ -68,11 +70,18 @@ export default function NewProjectPage() {
         <Form.Group controlId="formCategory">
           <Form.Label>Category</Form.Label>
           <Form.Control 
-            type="text" 
+            as="select" 
             value={category} 
             onChange={(e) => setCategory(e.target.value)} 
-            required 
-          />
+            required
+          >
+            <option value="">Select category</option>
+            <option value="romanzo">Romanzo</option>
+            <option value="saggio">Saggio</option>
+            <option value="poesia">Poesia</option>
+            <option value="racconto">Racconto</option>
+            <option value="testo sperimentale">Testo Sperimentale</option>
+          </Form.Control>
         </Form.Group>
 
         <Form.Group controlId="formText">

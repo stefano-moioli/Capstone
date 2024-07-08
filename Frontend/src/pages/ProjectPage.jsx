@@ -40,17 +40,17 @@ export default function ProjectPage() {
 
   const handleDelete = async () => {
     try {
-        const token = localStorage.getItem('userLogin');
-        const config = {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        };
+      const token = localStorage.getItem('userLogin');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
 
-        await axios.delete(`http://localhost:3005/projects/${id}`, config);
-        navigate('/profile');
+      await axios.delete(`http://localhost:3005/projects/${id}`, config);
+      navigate('/profile');
     } catch (error) {
-        setError(error.response?.data?.message || 'Errore durante l\'eliminazione del progetto');
+      setError(error.response?.data?.message || 'Errore durante l\'eliminazione del progetto');
     }
   };
 
@@ -91,11 +91,12 @@ export default function ProjectPage() {
 
   const modules = {
     toolbar: [
-      [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-      [{size: []}],
+      [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+      [{ size: [] }],
       ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, 
-       {'indent': '-1'}, {'indent': '+1'}],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' },
+      { 'indent': '-1' }, { 'indent': '+1' }],
+      [{ 'align': [] }],
       ['link', 'image', 'video'],
       ['clean']
     ],
@@ -105,6 +106,7 @@ export default function ProjectPage() {
     'header', 'font', 'size',
     'bold', 'italic', 'underline', 'strike', 'blockquote',
     'list', 'bullet', 'indent',
+    'align',
     'link', 'image', 'video'
   ];
 
@@ -132,15 +134,24 @@ export default function ProjectPage() {
                     onChange={(e) => setTitle(e.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="formCategory" className="mt-3">
+
+                <Form.Group controlId="formCategory">
                   <Form.Label>Category</Form.Label>
                   <Form.Control
-                    type="text"
-                    placeholder="Enter category"
+                    as="select"
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                  />
+                    required
+                  >
+                    <option value="">Select category</option>
+                    <option value="romanzo">Romanzo</option>
+                    <option value="saggio">Saggio</option>
+                    <option value="poesia">Poesia</option>
+                    <option value="racconto">Racconto</option>
+                    <option value="testo sperimentale">Testo Sperimentale</option>
+                  </Form.Control>
                 </Form.Group>
+
                 <Form.Group controlId="formText" className="mt-3">
                   <Form.Label>Text</Form.Label>
                   <ReactQuill

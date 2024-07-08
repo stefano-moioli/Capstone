@@ -160,13 +160,13 @@ export default function Homepage() {
           {feed.map(project => (
             <Card key={project._id} className="mb-3">
               <Card.Body>
-              <Link to={`/user/${project.user._id}/projects`}>
+              <Link to={`/project/${project._id}`}>
                   <Card.Title>{project.title}</Card.Title>
                 </Link>
                 <Card.Text>{project.category}</Card.Text>
                 
                 <Card.Footer>
-                  <small className="text-muted">Author: {project.user.username}</small>
+                  <small className="text-muted">Author: <Link to={`/user/${project.user._id}/projects`}>{project.user.username}</Link></small>
                   {project.user.followed ? (
                     <Button variant="danger" className="ml-2" onClick={() => handleUnfollow(project.user._id)}>Unfollow</Button>
                   ) : (
