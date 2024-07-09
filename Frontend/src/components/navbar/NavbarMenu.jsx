@@ -2,7 +2,9 @@ import React from "react";
 import { Button, Container, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import style from "../navbar/styles.css"
+import styles from "../navbar/style.css";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import { RxHamburgerMenu } from "react-icons/rx";
 
 export default function NavbarMenu() {
   const { user, logout } = useAuth();
@@ -21,11 +23,12 @@ export default function NavbarMenu() {
               <Button as={Link} to="/auth/register" className="me-3 navButton">
                 Register
               </Button>
+              <RxHamburgerMenu className="d-md-none"/>
             </>
           ) : (
             <>
-              <Link to="/profile" className="me-3">Profile</Link>
-              <Button onClick={logout} className="me-3">Logout</Button>
+              <Link to="/profile" className="me-3 ">Profile</Link>
+              <Button onClick={logout} className="me-3 navButton">Logout</Button>
               <Navbar.Text>
                 Signed in as: <Link to="/profile">{user.username}</Link>
               </Navbar.Text>
