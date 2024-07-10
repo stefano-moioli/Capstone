@@ -7,6 +7,7 @@ export default function PersonalProfile() {
   const { user, setUser } = useAuth();
   const [name, setName] = useState(user?.name || '');
   const [email, setEmail] = useState(user?.email || '');
+  const [username, setUsername] = useState(user?.username || '');
   const [avatar, setAvatar] = useState(null);
   const [password, setPassword] = useState('');
   const [isEditing, setIsEditing] = useState(false); // State per gestire la modalità di modifica
@@ -28,6 +29,7 @@ export default function PersonalProfile() {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('email', email);
+    formData.append('username', username);
     if (avatar) {
       formData.append('avatar', avatar);
     }
@@ -64,6 +66,16 @@ export default function PersonalProfile() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
           />
         </Form.Group>

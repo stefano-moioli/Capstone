@@ -42,7 +42,7 @@ router.get('/profile', authMiddleware, async (req, res) => {
 
 router.put('/update', authMiddleware, upload.single('avatar'), async (req, res) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, username } = req.body;
     const avatarUrl = req.file ? req.file.path : null;
 
     const user = await userModel.findById(req.user.id);
@@ -52,6 +52,7 @@ router.put('/update', authMiddleware, upload.single('avatar'), async (req, res) 
 
     if (name) user.name = name;
     if (email) user.email = email;
+    if (username) user.username = username;
     if (avatarUrl) user.avatar = avatarUrl;
 
     await user.save();
