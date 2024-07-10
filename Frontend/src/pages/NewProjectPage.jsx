@@ -76,11 +76,12 @@ export default function NewProjectPage() {
             required
           >
             <option value="">Select category</option>
-            <option value="romanzo">Romanzo</option>
-            <option value="saggio">Saggio</option>
-            <option value="poesia">Poesia</option>
-            <option value="racconto">Racconto</option>
-            <option value="testo sperimentale">Testo Sperimentale</option>
+            <option value="novel">Novel</option>
+            <option value="essay">Essay</option>
+            <option value="poem">Poem</option>
+            <option value="short-story">Short story</option>
+            <option value="experimental-text">Experimental text</option>
+            <option value="academy">Academy</option>
           </Form.Control>
         </Form.Group>
 

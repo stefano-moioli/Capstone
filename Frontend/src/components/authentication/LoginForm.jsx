@@ -37,29 +37,48 @@ export default function LoginForm() {
   };
 
   return (
-    <Container className="formContainer">
-      <Form>
-        <Form.Group as={Row} className="mb-3 w-50" controlId="formEmail">
-          <Col sm="10">
-            <Form.Control type="email" name="email" placeholder="Email" onChange={formHandler} />
-          </Col>
-        </Form.Group>
+    <Container className="formContainer d-flex justify-content-center align-items-center mt-4">
+      <Row className="w-100">
+        <Col xs={12} md={6} lg={4} className="mx-auto">
+          <Form>
+            <Form.Group className="mb-3" controlId="formEmail">
+              <Form.Control 
+                type="email" 
+                name="email" 
+                placeholder="Email" 
+                onChange={formHandler} 
+                className="text-center"
+              />
+            </Form.Group>
 
-        <Form.Group as={Row} className="mb-3 w-50" controlId="formPassword">
-          <Col sm="10">
-            <Form.Control type="password" name="password" placeholder="Password" onChange={formHandler}/>
-          </Col>
-        </Form.Group>
+            <Form.Group className="mb-3" controlId="formPassword">
+              <Form.Control 
+                type="password" 
+                name="password" 
+                placeholder="Password" 
+                onChange={formHandler} 
+                className="text-center"
+              />
+            </Form.Group>
 
-        <Button type="button" className="w-50 loginButton" onClick={formSubmitHandler}>
-          Login
-        </Button>
-      </Form>
-      <Button type="button" className="bg-primary w-50 mt-2">
-        Login with Google
-      </Button>
+            <Button 
+              type="button" 
+              className="w-100 loginButton" 
+              onClick={formSubmitHandler}
+            >
+              Login
+            </Button>
+          </Form>
+          <Button 
+            type="button" 
+            className="w-100 bg-primary mt-2"
+          >
+            Login with Google
+          </Button>
 
-      {error ? <Alert variant={"danger"} className="mt-3"> {error.message} </Alert> : ""}
+          {error && <Alert variant="danger" className="mt-3 text-center"> {error.message} </Alert>}
+        </Col>
+      </Row>
     </Container>
   );
 }
