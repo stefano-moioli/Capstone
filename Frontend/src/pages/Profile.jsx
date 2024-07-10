@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../components/AuthContext";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Container, Row, Col, Card, Image } from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
@@ -37,7 +37,12 @@ export default function Profile(){
     return(
         <Container>
             <h1 className="text-center mt-2">Profile Page by {user.username}</h1>
-
+            <Row className="mt-3 align-items-center">
+        <Col className="text-center">
+          {user.avatar && <Image src={user.avatar} alt="Avatar" roundedCircle style={{ width: '100px', height: '100px' }} />}
+          <h3 className="mt-3">{user.username}</h3>
+        </Col>
+      </Row>
             <h2 className="text-center mt-2">Projects</h2>
             <Row className="mt-5">
         {profileData.projects.map(project => (

@@ -13,6 +13,7 @@ import NewProjectPage from './pages/NewProjectPage';
 import ProjectPage from './pages/ProjectPage';
 import PublicProfilePage from './pages/PublicProfilePage';
 import ProjectDetails from './pages/ProjectDetails';
+import PersonalProfile from './pages/PersonalProfile';
 
 function App() {
   const  {user}   = useAuth();
@@ -29,6 +30,7 @@ function App() {
           <Route path='/projects/:id' element={<ProtectedRoute><ProjectPage /></ProtectedRoute>} />
           <Route path='/user/:userId/projects' element={<ProtectedRoute><PublicProfilePage /></ProtectedRoute>} />
           <Route path='/project/:projectId' element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
+          <Route path='/profile/edit' element={<ProtectedRoute><PersonalProfile /></ProtectedRoute>} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -3,7 +3,7 @@ import { Button, Container, Navbar, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import { RxHamburgerMenu } from "react-icons/rx";
-import styles from '../navbar/style.css'; // Assicurati che il percorso sia corretto
+import styles from '../navbar/style.css';
 
 export default function NavbarMenu() {
   const { user, logout } = useAuth();
@@ -54,8 +54,8 @@ export default function NavbarMenu() {
       
       <div className={`side-nav ${isOpen ? 'open' : ''}`}>
         <button className="close-btn" onClick={toggleSideNav}>&times;</button>
-        <Link to="/profile" className="d-block mb-3" onClick={toggleSideNav}>Profile</Link>
-        <Link to="/dashboard" className="d-block mb-3" onClick={toggleSideNav}>Dashboard</Link>
+        <Link to="/profile" className="d-block mb-3" onClick={toggleSideNav}>Dashboard</Link>
+        <Link to="/profile/edit" className="d-block mb-3" onClick={toggleSideNav}>Profile</Link>
         <Button onClick={() => { logout(); toggleSideNav(); }} className="d-block mb-3">Logout</Button>
       </div>
       {isOpen && <div className="overlay" onClick={toggleSideNav}></div>}
