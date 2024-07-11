@@ -8,15 +8,15 @@ export default function HeroSection() {
         <Container fluid className="heroSectionContainer">
             <main>
                 <Container>
-                <div className="heroSection">
-                    <h1>Writ3r</h1>
-                    <p>
-                        The social network for writers. Where you can write, share and discuss your writings.
-                    </p>
-                    <Button as={Link} to="/auth/register" className="mt-3 navButton">
-                Start writing now
-              </Button>
-                </div>
+                    <div className="heroSection">
+                        <h1>Writ3r</h1>
+                        <p>
+                            The social network for writers. Where you can write, share and discuss your writings.
+                        </p>
+                        <Button as={Link} to="/auth/register" className="mt-3 heroButton">
+                            Start writing now
+                        </Button>
+                    </div>
                 </Container>
             </main>
         </Container>

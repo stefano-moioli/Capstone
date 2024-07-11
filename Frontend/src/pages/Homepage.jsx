@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from '../components/AuthContext';
-import { Container, Row, Col, Card, Button, Alert } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, Alert, Spinner } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
@@ -130,7 +130,9 @@ export default function Homepage() {
   }
 
   if (users.length === 0) {
-    return <p>No users found.</p>;
+    return (<Spinner animation="border" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </Spinner>);
   }
 
   return (

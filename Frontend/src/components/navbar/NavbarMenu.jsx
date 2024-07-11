@@ -28,8 +28,8 @@ export default function NavbarMenu() {
                 <Button as={Link} to="/auth/register" className="me-3 navButton">
                   Register
                 </Button>
-                <Button variant="link" className="d-md-none" onClick={toggleSideNav}>
-                  SideNav
+                <Button as={Link} to="/auth/login" className="me-3 navButton d-block d-md-none">
+                  Login
                 </Button>
               </>
             ) : (

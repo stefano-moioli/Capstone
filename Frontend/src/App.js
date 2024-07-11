@@ -6,7 +6,7 @@ import GuestHomepage from './pages/GuestHomepage';
 import Footer from './components/Footer';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
-import Profile from './pages/Profile';
+import Profile from './pages/profile/Profile';
 import { useAuth } from './components/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import NewProjectPage from './pages/NewProjectPage';

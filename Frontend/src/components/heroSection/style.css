@@ -14,5 +14,10 @@
 }
 
 .heroSection{
-    padding: 90px 50px 50px 0px;
+    padding: 65px 50px 80px 5px;
+}
+
+.heroButton{
+  background-color: rgb(11, 95, 11)!important;
+  border: none!important;
 }

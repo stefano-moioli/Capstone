@@ -10,7 +10,7 @@ export default function PersonalProfile() {
   const [username, setUsername] = useState(user?.username || '');
   const [avatar, setAvatar] = useState(null);
   const [password, setPassword] = useState('');
-  const [isEditing, setIsEditing] = useState(false); // State per gestire la modalità di modifica
+  const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
@@ -30,9 +30,10 @@ export default function PersonalProfile() {
     formData.append('name', name);
     formData.append('email', email);
     formData.append('username', username);
-    if (avatar) {
+    /*if (avatar) {
       formData.append('avatar', avatar);
-    }
+    }*/
+    formData.append('avatar', avatar);
     if (password) {
       formData.append('password', password);
     }

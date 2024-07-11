@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useAuth } from "../components/AuthContext";
-import { Button, Container, Row, Col, Card, Image } from "react-bootstrap";
+import { useAuth } from "../../components/AuthContext";
+import { Button, Container, Row, Col, Card, Image, Spinner } from "react-bootstrap";
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import styles from '../profile/style.css'
 
 export default function Profile(){
     
@@ -31,24 +32,30 @@ export default function Profile(){
     }, []);
 
     if(!profileData){
-        return <p>Loading...</p>
+        return (
+          <Container className="text-center mt-5">
+          <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+    </Spinner>
+    </Container>
+        )
+        
     }
     
     return(
         <Container>
-            <h1 className="text-center mt-2">Profile Page by {user.username}</h1>
-            <Row className="mt-3 align-items-center">
+            <Row className="mt-3 align-items-center rowProfile">
         <Col className="text-center">
-          {user.avatar && <Image src={user.avatar} alt="Avatar" roundedCircle style={{ width: '100px', height: '100px' }} />}
-          <h3 className="mt-3">{user.username}</h3>
+        <h3 className="mt-3">{user.username}</h3>
+          {user.avatar && <Image src={user.avatar} className="mb-3" alt="Avatar" roundedCircle style={{ width: '85px', height: '85px', objectFit: 'cover' }} />}
         </Col>
       </Row>
-            <h2 className="text-center mt-2">Projects</h2>
-            <Row className="mt-5">
+            <h2 className="text-center mt-5">Projects</h2>
+            <Row className="mt-4">
         {profileData.projects.map(project => (
           <Col key={project._id} md={4} className="mb-3">
-            <Link to={`/projects/${project._id}`}>
-            <Card>
+            <Link to={`/projects/${project._id}`} className="projectCard">
+            <Card className="projectCard">
               <Card.Body>
                 <Card.Title>{project.title}</Card.Title>
                 <Card.Text>{project.category}</Card.Text>
@@ -62,7 +69,7 @@ export default function Profile(){
       <Row>
         <Col className="text-center">
         <Link to="/projects/new">
-        <Button className="w-50 mt-3">New Project</Button>
+        <Button className="w-100 mt-3 projectButton">New Project</Button>
         </Link>
         </Col>
       </Row>

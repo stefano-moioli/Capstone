@@ -37,7 +37,8 @@ router.post('/auth/login', async (req, res) => {
             id: userLogin.id,
             email: userLogin.email,
             name: userLogin.name,
-            username: userLogin.username
+            username: userLogin.username,
+            avatar: userLogin.avatar
           }, 
           jwtSecretKey, 
           { expiresIn: "1h" }
