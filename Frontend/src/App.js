@@ -14,6 +14,7 @@ import ProjectPage from './pages/ProjectPage';
 import PublicProfilePage from './pages/PublicProfilePage';
 import ProjectDetails from './pages/ProjectDetails';
 import PersonalProfile from './pages/PersonalProfile';
+import ErrorPage from './pages/ErrorPage';
 
 function App() {
   const  {user}   = useAuth();
@@ -31,6 +32,8 @@ function App() {
           <Route path='/user/:userId/projects' element={<ProtectedRoute><PublicProfilePage /></ProtectedRoute>} />
           <Route path='/project/:projectId' element={<ProtectedRoute><ProjectDetails /></ProtectedRoute>} />
           <Route path='/profile/edit' element={<ProtectedRoute><PersonalProfile /></ProtectedRoute>} />
+          <Route path='/*' element={<ErrorPage />} />
+
         </Routes>
         <Footer />
       </BrowserRouter>

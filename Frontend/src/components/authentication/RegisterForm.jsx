@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Form, Row, Col, Container, Button } from "react-bootstrap";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function RegisterForm() {
 
   const [user, setUser] = useState({});
+  const navigate = useNavigate();
 
   const formHandler = (e) => {
     setUser({
@@ -19,7 +20,10 @@ export default function RegisterForm() {
     e.preventDefault();
 
     axios.post("http://localhost:3005/auth/register", user)
-      .then(response => console.log(response))
+      .then((response) => {
+      console.log(response)
+      navigate("/profile") 
+  })
       .catch(error => console.error(error))
   }
 
@@ -43,10 +47,6 @@ export default function RegisterForm() {
 
             <Form.Group className="mb-3" controlId="formPassword">
               <Form.Control type="password" name="password" placeholder="Password" onChange={formHandler} />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formAvatar">
-              <Form.Control type="text" name="avatar" placeholder="Avatar" onChange={formHandler} />
             </Form.Group>
 
             <Button type="submit" className="loginButton w-100" onClick={formSubmitHandler}> Register </Button>
