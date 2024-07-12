@@ -82,3 +82,9 @@
 .burgerMenu:hover{
   cursor: pointer;
 }
+
+.sticky-nav {
+  position: sticky!important;
+  top: 0;
+  z-index: 1;
+}

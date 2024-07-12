@@ -54,10 +54,10 @@ export default function NewProjectPage() {
   ];
 
   return (
-    <Container>
-      <h1>New Project</h1>
+    <Container className="mt-4">
+      <h1>Start a New Project</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formTitle">
+        <Form.Group controlId="formTitle" className="mt-3">
           <Form.Label>Title</Form.Label>
           <Form.Control 
             type="text" 
@@ -67,7 +67,7 @@ export default function NewProjectPage() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formCategory">
+        <Form.Group controlId="formCategory" className="mt-3">
           <Form.Label>Category</Form.Label>
           <Form.Control 
             as="select" 
@@ -85,9 +85,9 @@ export default function NewProjectPage() {
           </Form.Control>
         </Form.Group>
 
-        <Form.Group controlId="formText">
+        <Form.Group controlId="formText" className="mt-3">
           <Form.Label>Text</Form.Label>
-          <ReactQuill 
+          <ReactQuill
             theme="snow" 
             value={text} 
             onChange={setText} 
@@ -99,7 +99,8 @@ export default function NewProjectPage() {
 
         {error && <Alert variant="danger" className="mt-3">{error}</Alert>}
 
-        <Button type="submit" className="mt-3">Submit</Button>
+        <Button type="submit" className="mt-3" style={{backgroundColor: "rgb(11, 95, 11)",
+   border: "none"}}>Submit</Button>
       </Form>
     </Container>
   );
