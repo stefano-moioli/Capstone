@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Container, Card, Form, Button, Alert } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import { Container, Card, Form, Button, Alert, Image, CardText, Row, Col } from "react-bootstrap";
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
+import { MdOutlineModeEdit } from "react-icons/md";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 export default function ProjectDetails() {
   const { projectId } = useParams();
@@ -100,14 +102,35 @@ export default function ProjectDetails() {
 
   return (
     <Container>
-      <Card>
+      <Card className='mt-5 text-center' style={{boxShadow: "2px 5px 12px 3px rgb(11, 95, 11)"}}>
         <Card.Body>
           <Card.Title>{project.title}</Card.Title>
+
+          
+
+          <div className="d-flex justify-content-center gap-1">
+         
+          <Card.Text>
+          <Link to={`/user/${project.user._id}/projects`}>  
+          <Image src={project.user.avatar} alt="Avatar" roundedCircle style={{ width: '25px', height: '26px', objectFit: 'cover' }} />
+          </Link>
+          </Card.Text>
+          
+          <CardText>
+          {project.user.username}
+          </CardText>
+        
+          </div>
+
+         
+            
+
           <Card.Text>{project.category}</Card.Text>
-          <Card.Text dangerouslySetInnerHTML={{ __html: project.text }} />
         </Card.Body>
       </Card>
-      <h3>Comments</h3>
+      <Card.Text className='mt-5' style={{borderBlockEnd: "1px solid #ced4da", paddingBottom: "20px"}} dangerouslySetInnerHTML={{ __html: project.text }} />
+      
+      <h4 className="mt-5 mb-4">Comments</h4>
       {comments.map(comment => (
         <Card key={comment._id} className="mb-3">
           <Card.Body>
@@ -127,11 +150,16 @@ export default function ProjectDetails() {
             ) : (
               <>
                 <Card.Text>{comment.text}</Card.Text>
-                <small className="text-muted">- {comment.user.username}</small>
+                <div className="d-flex justify-content-start gap-1">
+                <Link to={`/user/${comment.user._id}/projects`}>  
+          <Image src={comment.user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }} />
+          </Link>   
+                <small className="text-muted">{comment.user.username}</small>
+                </div>
                 {comment.user._id === user?.id && (
-                  <div>
-                    <Button onClick={() => { setEditCommentId(comment._id); setEditCommentText(comment.text); }} variant="warning" className="ml-2">Edit</Button>
-                    <Button onClick={() => handleDeleteComment(comment._id)} variant="danger" className="ml-2">Delete</Button>
+                  <div className="mt-2">
+                   <Button style={{backgroundColor: "transparent", border: "none", color: "black"}}><MdOutlineModeEdit onClick={() => { setEditCommentId(comment._id); setEditCommentText(comment.text)}}/></Button>
+                   <Button style={{backgroundColor: "transparent", border: "none", color: "black"}}><RiDeleteBin5Line onClick={() => handleDeleteComment(comment._id)}/></Button>
                   </div>
                 )}
               </>
@@ -139,7 +167,7 @@ export default function ProjectDetails() {
           </Card.Body>
         </Card>
       ))}
-      <Form onSubmit={handleCommentSubmit}>
+      <Form onSubmit={handleCommentSubmit} className="mt-5">
         <Form.Group>
           <Form.Label>Leave a comment</Form.Label>
           <Form.Control
@@ -149,7 +177,8 @@ export default function ProjectDetails() {
             onChange={(e) => setCommentText(e.target.value)}
           />
         </Form.Group>
-        <Button type="submit">Submit</Button>
+        <Button style={{backgroundColor: "rgb(11, 95, 11)",
+   border: "none"}} className="mt-3" type="submit">Submit</Button>
       </Form>
     </Container>
   );

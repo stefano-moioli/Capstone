@@ -25,7 +25,7 @@ router.post('/projects', authMiddleware, async(req, res) =>{
 
 router.get('/projects/:id', authMiddleware, async(req, res) =>{
     try {
-        const project = await projectModel.findById(req.params.id).populate('user', 'username email');
+        const project = await projectModel.findById(req.params.id).populate('user', 'username email name avatar');
         if (!project) {
             return res.status(404).json({ message: 'Project not found' });
         }

@@ -22,7 +22,7 @@ router.post('/comments', authMiddleware, async(req, res) =>{
 //Recupero commenti per un progetto
 router.get('/comments/:projectId', async (req, res) => {
     try {
-      const comments = await commentModel.find({ project: req.params.projectId }).populate('user', 'username');
+      const comments = await commentModel.find({ project: req.params.projectId }).populate('user', 'username avatar');
       return res.status(200).json(comments);
     } catch (error) {
       return res.status(500).json({ message: 'Server error', error });

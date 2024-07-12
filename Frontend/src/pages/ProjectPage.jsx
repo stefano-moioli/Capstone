@@ -167,11 +167,7 @@ export default function ProjectPage() {
             </>
           ) : (
             <>
-            <Card className='mt-5 text-center' 
-            
-            style={{boxShadow: "2px 5px 12px 3px rgb(11, 95, 11)"}}
-            
-            >
+            <Card className='mt-5 text-center' style={{boxShadow: "2px 5px 12px 3px rgb(11, 95, 11)"}}>
               <CardBody>
               <Card.Title>{project.title}</Card.Title>
               <Card.Text>{project.category}</Card.Text>
