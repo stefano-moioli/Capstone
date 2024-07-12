@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Container, Card, Form, Button, Alert, Image, CardText, Row, Col } from "react-bootstrap";
+import { Container, Card, Form, Button, Alert, Image, CardText } from "react-bootstrap";
 import axios from 'axios';
 import { useAuth } from '../components/AuthContext';
 import { MdOutlineModeEdit } from "react-icons/md";
@@ -116,7 +116,7 @@ export default function ProjectDetails() {
           </Link>
           </Card.Text>
           
-          <CardText>
+          <CardText className="pt-1">
           {project.user.username}
           </CardText>
         
@@ -154,7 +154,7 @@ export default function ProjectDetails() {
                 <Link to={`/user/${comment.user._id}/projects`}>  
                 {comment.user.avatar ? (<Image src={comment.user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }} />) : ("")}
           </Link>   
-                <small className="text-muted">{comment.user.username}</small>
+                <small className="text-muted pt-1">{comment.user.username}</small>
                 </div>
                 {comment.user._id === user?.id && (
                   <div className="mt-2">

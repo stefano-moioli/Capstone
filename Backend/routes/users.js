@@ -9,7 +9,7 @@ router.get('/users', authMiddleware, async (req, res) => {
         const loggedUserId = req.user.id;
 
         // Find all users except the logged-in user
-        const users = await userModel.find({ _id: { $ne: loggedUserId } }, 'username'); //$ne sta per not equal ed esclude l'id dell'utente loggato
+        const users = await userModel.find({ _id: { $ne: loggedUserId } }, 'username avatar'); //$ne sta per not equal ed esclude l'id dell'utente loggato
 
         return res.status(200).json(users);
     } catch (error) {
@@ -63,7 +63,7 @@ router.post('/unfollow/:userId', authMiddleware, async (req, res) => {
 
 router.get('/following', authMiddleware, async (req, res) => {
     try {
-        const user = await userModel.findById(req.user.id).populate('following', 'username');
+        const user = await userModel.findById(req.user.id).populate('following', 'username avatar');
         return res.status(200).json(user.following);
     } catch (error) {
         return res.status(500).json({ message: 'Server error', error: error });
