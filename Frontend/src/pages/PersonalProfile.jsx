@@ -57,7 +57,7 @@ export default function PersonalProfile() {
   };
 
   return (
-    <Container>
+    <Container className='mt-5'>
       <h1>Personal Profile</h1>
       
       <Form onSubmit={handleSubmit}>
@@ -71,7 +71,7 @@ export default function PersonalProfile() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formUsername">
+        <Form.Group controlId="formUsername" className='mt-3'>
           <Form.Label>Username</Form.Label>
           <Form.Control
             type="text"
@@ -81,7 +81,7 @@ export default function PersonalProfile() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formEmail">
+        <Form.Group controlId="formEmail" className='mt-3'>
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
@@ -91,7 +91,7 @@ export default function PersonalProfile() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formAvatar">
+        <Form.Group controlId="formAvatar" className='mt-3'>
           <Form.Label>Avatar</Form.Label>
           <Form.Control
             type="file"
@@ -100,7 +100,7 @@ export default function PersonalProfile() {
           />
         </Form.Group>
 
-        <Form.Group controlId="formPassword">
+        <Form.Group controlId="formPassword" className='mt-3'>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -110,9 +110,20 @@ export default function PersonalProfile() {
           />
         </Form.Group>
 
-        {!isEditing ? (<Button className="mt-3" onClick={() => setIsEditing(true)}>Modify</Button>) : ("")}
+        {!isEditing ? (<Button className="mt-3" 
+        
+        style={{backgroundColor: "rgb(11, 95, 11)",
+          border: "none"}}
+        
+        onClick={() => setIsEditing(true)}>Modify</Button>) : ("")}
 
-        {isEditing ? (<Button type="submit" className="mt-3">Update Profile </Button>)
+        {isEditing ? (<Button type="submit" className="mt-3"
+        
+        style={{backgroundColor: "rgb(11, 95, 11)",
+        border: "none"}}
+      
+        
+        >Update Profile </Button>)
         :
         ("") 
         }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 export default function Footer(){
     return(
@@ -10,7 +10,9 @@ export default function Footer(){
         textAlign: "center"
       }}
     >
-      <Container>{`${new Date().getFullYear()} - © Writ3r - The Social Network for Writers`}</Container>
+      <Container className="mt-5" style={{padding: "10px"}}>
+        {`${new Date().getFullYear()} - © Writ3r - The Social Network for Writers`}
+      </Container>
     </footer>
     )
 }

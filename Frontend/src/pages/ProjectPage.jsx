@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Container, Card, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Card, Button, Form, Alert, CardBody } from 'react-bootstrap';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -120,8 +120,6 @@ export default function ProjectPage() {
 
   return (
     <Container>
-      <Card className="mt-5">
-        <Card.Body>
           {isEditing ? (
             <>
               <Form>
@@ -169,9 +167,17 @@ export default function ProjectPage() {
             </>
           ) : (
             <>
+            <Card className='mt-5 text-center' 
+            
+            style={{boxShadow: "2px 5px 12px 3px rgb(11, 95, 11)"}}
+            
+            >
+              <CardBody>
               <Card.Title>{project.title}</Card.Title>
               <Card.Text>{project.category}</Card.Text>
-              <Card.Text dangerouslySetInnerHTML={{ __html: project.text }} />
+              </CardBody>
+            </Card>
+              <Card.Text className='mt-5' dangerouslySetInnerHTML={{ __html: project.text }} />
             </>
           )}
           <Button variant="warning" className="mt-3" onClick={() => setIsEditing(!isEditing)}>
@@ -183,8 +189,7 @@ export default function ProjectPage() {
           <Button variant="success" className="mt-3 ms-2" onClick={handlePublish}>
             {project.published ? 'Unpublish' : 'Publish'}
           </Button>
-        </Card.Body>
-      </Card>
+        
     </Container>
   );
 }

@@ -22,6 +22,7 @@ export default function RegisterForm() {
     axios.post("http://localhost:3005/auth/register", user)
       .then((response) => {
       console.log(response)
+      alert("User created with success")
       navigate("/profile") 
   })
       .catch(error => console.error(error))
