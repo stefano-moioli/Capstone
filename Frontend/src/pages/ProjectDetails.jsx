@@ -152,7 +152,7 @@ export default function ProjectDetails() {
                 <Card.Text>{comment.text}</Card.Text>
                 <div className="d-flex justify-content-start gap-1">
                 <Link to={`/user/${comment.user._id}/projects`}>  
-          <Image src={comment.user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }} />
+                {comment.user.avatar ? (<Image src={comment.user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }} />) : ("")}
           </Link>   
                 <small className="text-muted">{comment.user.username}</small>
                 </div>

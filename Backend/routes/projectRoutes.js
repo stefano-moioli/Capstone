@@ -67,7 +67,7 @@ router.patch('/projects/:id/publish', authMiddleware, async (req, res) => {
 
 router.get('/user/:userId/projects', authMiddleware, async (req, res) => {
     try {
-      const projects = await projectModel.find({ user: req.params.userId }).populate('comments');
+      const projects = await projectModel.find({ user: req.params.userId }).populate('user', 'username email name avatar');
       return res.status(200).json(projects);
     } catch (error) {
       return res.status(500).json({ message: 'Server error', error });
