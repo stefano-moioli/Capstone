@@ -177,7 +177,9 @@ export default function Homepage() {
       
         <Col md={4}>
           <h2 className="text-center">Suggested Users</h2>
-          {users.map(user => (
+          {users
+          .filter(user => !user.followed)
+          .map(user => (
             <Card key={user._id} className="mb-3">
               <Card.Body>
                 <Card.Title>{user.username}</Card.Title>
