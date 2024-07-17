@@ -49,7 +49,7 @@ export default function PersonalProfile() {
 
       setUser(response.data.user);
       setSuccess('Profile updated successfully');
-      setIsEditing(false); // Disabilita la modalità di modifica dopo l'aggiornamento
+      setIsEditing(false); 
     } catch (error) {
       setError('Error updating profile');
       console.error('Error:', error.response?.data || error.message);
@@ -67,7 +67,7 @@ export default function PersonalProfile() {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
+            disabled={!isEditing} 
           />
         </Form.Group>
 
@@ -77,7 +77,7 @@ export default function PersonalProfile() {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
+            disabled={!isEditing} 
           />
         </Form.Group>
 
@@ -87,7 +87,7 @@ export default function PersonalProfile() {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
+            disabled={!isEditing}
           />
         </Form.Group>
 
@@ -96,7 +96,7 @@ export default function PersonalProfile() {
           <Form.Control
             type="file"
             onChange={(e) => setAvatar(e.target.files[0])}
-            disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
+            disabled={!isEditing}
           />
         </Form.Group>
 
@@ -106,7 +106,7 @@ export default function PersonalProfile() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            disabled={!isEditing} // Disabilita l'input se non è in modalità di modifica
+            disabled={!isEditing} 
           />
         </Form.Group>
 

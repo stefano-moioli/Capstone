@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from '../components/AuthContext';
 import { Container, Row, Col, Card, Button, Alert, Spinner, Image, CardBody } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import { CgProfile } from "react-icons/cg";
 import axios from 'axios';
 
 export default function Homepage() {
@@ -131,72 +132,76 @@ export default function Homepage() {
 
   if (users.length === 0) {
     return (<Container className="mt-5 text-center"><Spinner animation="border" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner></Container>);
+      <span className="visually-hidden">Loading...</span>
+    </Spinner></Container>);
   }
 
   return (
-    <Container className="mt-5">    
-      <Row className="text-center" style={{borderBottom: "1px solid #ced4da", paddingBottom: "15px"}} >
+    <Container className="mt-5">
+      <Row className="text-center" style={{ borderBottom: "1px solid #ced4da", paddingBottom: "15px" }} >
         <Col>
-      <Image className="me-2" src={user.avatar} alt="Avatar" roundedCircle style={{ width: '55px', height: '55px', objectFit: 'cover' }} />
-        {user.username}
-        <Link to="/projects/new">
-        <Button className="projectButton ms-2">New Project</Button>
-        </Link>
+          <Image className="me-2" src={user.avatar} alt="Avatar" roundedCircle style={{ width: '55px', height: '55px', objectFit: 'cover' }} />
+          {user.username}
+          <Link to="/projects/new">
+            <Button className="projectButton ms-2">New Project</Button>
+          </Link>
         </Col>
-        </Row>
-    
+      </Row>
 
-        <Row className="mt-5">
+
+      <Row className="mt-5">
         <Col md={8}>
           <h2 className="text-center">Feed</h2>
           {feed.map(project => (
             <Card key={project._id} className="mb-3">
               <Card.Body>
-              <Link to={`/project/${project._id}`} style={{textDecoration: "none", color: "black"}}>
+                <Link to={`/project/${project._id}`} style={{ textDecoration: "none", color: "black" }}>
                   <Card.Title>{project.title}</Card.Title>
                 </Link>
                 <Card.Text>{project.category}</Card.Text>
-                
+
                 <div className="d-flex gap-1">
-                  <Image src={project.user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }}/>
-                  <Link style={{textDecoration: "none", color: "black"}} to={`/user/${project.user._id}/projects`}>{project.user.username}</Link>
-                  </div>
-                  
-                  {project.user.followed ? (
-                    <Button style={{border: "none", background: "transparent", color: "black"}} onClick={() => handleUnfollow(project.user._id)}>Unfollow</Button>
-                  ) : (
-                    <Button variant="success" className="ml-2" onClick={() => handleFollow(project.user._id)}>Follow</Button>
-                  )}
-    
+                  <Image src={project.user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }} />
+                  <Link style={{ textDecoration: "none", color: "black" }} to={`/user/${project.user._id}/projects`}>{project.user.username}</Link>
+                </div>
+
+                {project.user.followed ? (
+                  <Button style={{ border: "none", background: "transparent", color: "#c10505" }} onClick={() => handleUnfollow(project.user._id)}>Unfollow</Button>
+                ) : (
+                  <Button variant="success" className="ml-2" onClick={() => handleFollow(project.user._id)}>Follow</Button>
+                )}
+
               </Card.Body>
             </Card>
           ))}
         </Col>
-      
+
         <Col md={4}>
           <h2 className="text-center">Suggested Users</h2>
           {users
-          .filter(user => !user.followed)
-          .map(user => (
-            <Card key={user._id} className="mb-3">
-              <Card.Body>
-                <Card.Title>{user.username}</Card.Title>
-                <Link to={`/user/${user._id}/projects`}>
-                  <Button variant="primary">View Projects</Button>
-                </Link>
-                {user.followed ? (
-                  <Button variant="danger" className="ml-2" onClick={() => handleUnfollow(user._id)}>Unfollow</Button>
-                ) : (
-                  <Button variant="success" className="ml-2" onClick={() => handleFollow(user._id)}>Follow</Button>
-                )}
-              </Card.Body>
-            </Card>
-          ))}
+            .filter(user => !user.followed)
+            .map(user => (
+              <Card key={user._id} className="mb-3">
+                <Card.Body>
+                  <div className="d-flex gap-1">
+                    {user.avatar ? (
+                      <Image src={user.avatar} alt="Avatar" roundedCircle style={{ width: '23px', height: '23px', objectFit: 'cover' }} />
+                    ) : (
+                      <CgProfile style={{ width: '23px', height: '23px' }} />
+                    )}
+                    <Link style={{ textDecoration: "none", color: "black" }} to={`/user/${user._id}/projects`}>{user.username}</Link>
+                  </div>
+                  {user.followed ? (
+                    <Button variant="danger" className="ml-2" onClick={() => handleUnfollow(user._id)}>Unfollow</Button>
+                  ) : (
+                    <Button style={{ border: "none", background: "transparent", color: "rgb(11, 95, 11)" }} className="ml-2" onClick={() => handleFollow(user._id)}>Follow</Button>
+                  )}
+                </Card.Body>
+              </Card>
+            ))}
         </Col>
-        </Row>
-        
+      </Row>
+
 
     </Container>
   );

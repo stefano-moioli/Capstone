@@ -39,13 +39,13 @@ export default function PublicProfilePage() {
   }
 
   return (
-    <Container>
+    <Container className="mt-5">
      
 
-      <Row className="mt-3 align-items-center rowProfile">
+      <Row className="mt-3 align-items-center" style={{borderBottom: "1px solid #ced4da"}}>
         <Col className="text-center">
         <h3 className="mt-3">{user.username}</h3>
-          {user.avatar && <Image src={user.avatar} className="mb-3" alt="Avatar" roundedCircle style={{ width: '85px', height: '85px', objectFit: 'cover' }} />}
+          {user.avatar && <Image src={user.avatar} className="mb-3" alt="Avatar" roundedCircle style={{ width: '85px', height: '85px', objectFit: 'cover', boxShadow: "2px 5px 12px 3px rgb(11, 95, 11)" }} />}
         </Col>
       </Row>
 
