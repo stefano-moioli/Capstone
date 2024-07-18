@@ -119,7 +119,7 @@ export default function Homepage() {
 
       setUser(prevUser => ({
         ...prevUser,
-        following: prevUser.following.filter(followedUser => followedUser._id !== userId)
+        following: Array.isArray(prevUser.following) ? prevUser.following.filter(followedUser => followedUser._id !== userId) : []
       }));
     } catch (error) {
       setError(error.response ? error.response.data.message : error.message);
