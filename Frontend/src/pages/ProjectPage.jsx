@@ -161,7 +161,7 @@ export default function ProjectPage() {
                   />
                 </Form.Group>
               </Form>
-              <Button className="mt-3" variant="primary" onClick={handleEdit}>
+              <Button className="mt-3 me-2" variant="primary" onClick={handleEdit}>
                 Save Changes
               </Button>
             </>
@@ -173,7 +173,7 @@ export default function ProjectPage() {
               <Card.Text>{project.category}</Card.Text>
               </CardBody>
             </Card>
-              <Card.Text className='mt-5' dangerouslySetInnerHTML={{ __html: project.text }} />
+              <Card.Text className='mt-5' style={{borderBottom: "1px solid #ced4da"}} dangerouslySetInnerHTML={{ __html: project.text }} />
             </>
           )}
           <Button variant="warning" className="mt-3" onClick={() => setIsEditing(!isEditing)}>

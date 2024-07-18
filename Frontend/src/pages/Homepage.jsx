@@ -151,9 +151,9 @@ export default function Homepage() {
 
       <Row className="mt-5">
         <Col md={8}>
-          <h2 className="text-center">Feed</h2>
+          
           {feed.map(project => (
-            <Card key={project._id} className="mb-3">
+            <Card style={{border: "none", borderBottom: "1px solid #ced4da"}} key={project._id} className="mb-5">
               <Card.Body>
                 <Link to={`/project/${project._id}`} style={{ textDecoration: "none", color: "black" }}>
                   <Card.Title>{project.title}</Card.Title>

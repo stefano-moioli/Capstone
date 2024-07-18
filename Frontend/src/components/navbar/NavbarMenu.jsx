@@ -15,7 +15,7 @@ export default function NavbarMenu() {
 
   return (
     <>
-      <Navbar className="bg-body-tertiary sticky-nav">
+      <Navbar className="bg-white sticky-nav">
         <Container>
           <Navbar.Brand as={Link} to="/">Writ3r</Navbar.Brand>
           <Navbar.Toggle />
